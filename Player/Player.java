@@ -1,27 +1,42 @@
 import java.util.ArrayList;
 
 public class Player {
-    private int playerId;
-    private int playerTurn = 0;
+    private String playerName;
+    private int playerTurn;
     private ArrayList<Card> kartu;
+    static int numofPlayer = 0;
 
     //Constructor Player
-    public player(int playerId, int playerTurn) {
-        this.playerId = playerId;
-        this.playerTurn = playerTurn + 1;
+    public player(String playerName, int playerTurn) {
+        this.playerName = playerName;
+        this.playerTurn = playerTurn;
         kartu = new ArrayList<Card>();
+        numofPlayer ++;
     }
     // Bikin kartu yang dipegang sama player
     public void takeDeck(){
-        kartu.add(drawRandomCard()); //ini fungsi drawRandomCard belum dibikin
-        kartu.add(drawRandomCard());
-        kartu.add(drawRandomCard());
-        kartu.add(drawRandomCard());
-        kartu.add(drawRandomCard());
-        kartu.add(drawRandomCard());
-        kartu.add(drawRandomCard());
+        for (int i = 0; i < 7; i++){
+            kartu.add(getCard()); //ini fungsi drawRandomCard belum dibikin
+        }
     }
-    public void CreateHand() {
-        
+    public boolean hasOneCard(){
+        if (kartu.size() == 1){
+            declareHiji();
+        }
+    }
+    public void getHand(){
+        for (int i = 0; i < kartu.size(); i++){
+            System.out.println(kartu.get(i));
+        }
+    }
+    public String getPlayerName(){
+        return playerName;
+    }
+    public int getPlayerTurn(){
+        return playerTurn;
+    }
+    public static int getnumPlayers(){
+        return numofPlayer;
     }
 }
+// Tambahin = 1. Has hand card(Panjang aray kartu 1 panggil declare hiji); 2.Getternya (List kartu hand, nama, urutan);
