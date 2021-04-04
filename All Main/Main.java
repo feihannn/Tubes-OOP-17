@@ -11,6 +11,7 @@ public class Main {
     private Deck pile_card=new Deck();//Sebagai persiapan kebutuhan deck untuk kartu awal,dll
     private Card top_card=new WildCard(Type.WILDCLR, Color.BLACK);//Membuat kartu paling atas
     private Random random = new Random();//Buat fungsi random
+    public int jumlah_draw=0;//digunakan untuk menumpuk jumlah draw +2 yang dikeluarkan
     
     // mengubah arah putaran giliran pemain
     private void reverseRotation() { 
@@ -97,11 +98,10 @@ public class Main {
     public static void main(String[] args) {//Main programnya
         Main main_menu=new Main();//Digunakan untuk mengakses semua methode-methode lainnya
         boolean win=false;//Buat menentukan apabila game bisa diselesaikan atau tidak
-        boolean done_discard=false;//Mengcheck apakah pemain masih ingin membuang kartu atau tidak
         int buang_kartu;//Digunakan untuk player memilih kartu yang ingin dibuang
         System.out.print("Masukkan perintah: ");
         String perintah=input.next();//Memasukkan perintah
-        String opsi_discard;
+        String ganti_warna;
         //Asumsi pemain harus memulai game terlebih dahulu baru boleh mengakses hal lainnya
         while(!perintah.equals("F01")){
             System.out.println("Anda belum memulai game, silahkan mulai gamenya terlebih dahulu!");
@@ -149,13 +149,23 @@ public class Main {
                     //Ganti pemainnya
                     System.out.println("Anda telah membuang kartu/tidak memiliki kartu yang dapat dibuang!");
                     System.out.println("Giliran akan berganti!");
+                    if(main_menu.getTopCard().getType()!=null){
+                        if(main_menu.getTopCard().getType().equals(Type.SKIP.toString())){//Melakukan skipping turn
+                            main_menu.setUrutanSekarang(main_menu.getNextIndex());
+                        }else if(main_menu.getTopCard().getType().equals(Type.REVERSE.toString())){
+                            main_menu.reverseRotation();
+                        }else if(main_menu.getTopCard().getType().equals(Type.WILDCLR.toString())){
+                            System.out.print("Eits sebeluh berganti, pilih dulu warna wildcardmu: ");
+                            ganti_warna=input.next();
+                        }
+                    }
                     main_menu.setUrutanSekarang(main_menu.getNextIndex());
                     main_menu.setPemainSekarang(pemain.get(main_menu.getUrutanSekarang()));
                     System.out.println("Sekarang giliran: "+main_menu.getPemainSekarang().getPlayerName());
-                    done_discard=false;
                     break;
                 case "F04"://Draw kartu
                     main_menu.getPemainSekarang().draw();
+                    System.out.println("Anda berhasil menarik kartu!");
                     break;
                 case "F05"://Declare HIJI
                     System.out.println("Declare HIJI");

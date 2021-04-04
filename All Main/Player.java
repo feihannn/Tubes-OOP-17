@@ -25,6 +25,11 @@ public class Player {
     public void draw(){
         kartu.add(dek_kartu.getCard());
     }
+    public void drawupto(int jumlah){
+        for(int i=0;i<jumlah;i++){
+            kartu.add(dek_kartu.getCard());
+        }
+    }
     //Perantara buat fungsi F05
     public void hasOneCard(){
         if (kartu.size() == 1){
