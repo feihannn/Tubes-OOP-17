@@ -120,43 +120,32 @@ public class Main {
                     main_menu.getPemainSekarang().getHand();
                     break;
                 case "F03"://Discard
-                    //Membuang kartunya
-                    System.out.println("Kartu yang sedang ada di arena: "+main_menu.getTopCard().getColor().toString()+" "+main_menu.getTopCard().getNum().toString());
-                    while(!done_discard){
-                        boolean found=false;
-                        main_menu.getPemainSekarang().getdiscardableHand(main_menu.getTopCard());
-                        if(main_menu.getPemainSekarang().discardable_kartu.size()==0){
-                            System.out.println("Anda tidak memiliki kartu yang bisa dikeluarkan lagi!");
-                            done_discard=true;
-                        }else{
-                            System.out.print("Pilih kartu yang ingin dibuang: ");
-                            buang_kartu=input.nextInt();
-                            main_menu.setTopCard(main_menu.getPemainSekarang().discardable_kartu.get(buang_kartu-1));//masih perlu didebug sepertinya
-                            int i=0;
-                            while(!found){
-                                /*if(main_menu.getTopCard().getType()==null){
-                                    if((main_menu.getTopCard().getNum().toString().equals(main_menu.getPemainSekarang().getKartuTangan().get(i).getNum().toString()))&&(main_menu.getTopCard().getColor().toString().equals(main_menu.getPemainSekarang().getKartuTangan().get(i).getColor().toString()))){
-                                        found=true;
-                                    }
-                                }else if(main_menu.getTopCard().getNum()==null){
-                                    if((main_menu.getTopCard().getType().toString().equals(main_menu.getPemainSekarang().getKartuTangan().get(i).getType().toString()))&&(main_menu.getTopCard().getColor().toString().equals(main_menu.getPemainSekarang().getKartuTangan().get(i).getColor().toString()))){
-                                        found=true;
-                                    }
-                                }else{i++;}*/
-                                if((main_menu.getPemainSekarang().kartu.get(i).getType()==main_menu.getTopCard().getType())&&(main_menu.getPemainSekarang().kartu.get(i).getNum()==main_menu.getTopCard().getNum())&&(main_menu.getPemainSekarang().kartu.get(i).getColor()==main_menu.getTopCard().getColor())){
-                                    found=true;
-                                }else{i++;}
-                                
+                    boolean multi_disc=false;//mengecheck apakah player dapat melakukan multi discard
+                    System.out.print("Kartu yang sedang ada di arena: ");//Menampilkan kartu yang sedang ada di arena
+                    if(main_menu.getTopCard().getNum()==null){
+                        System.out.println(main_menu.getTopCard().getColor().toString()+" "+main_menu.getTopCard().getType().toString());
+                    }else{
+                        System.out.println(main_menu.getTopCard().getColor().toString()+" "+main_menu.getTopCard().getNum().toString());
+                    }
+                    main_menu.getPemainSekarang().getdiscardableHand(main_menu.getTopCard());//Menampilkan kartu apa saja yang bisa dikeluarkan pemain
+                    if(main_menu.getPemainSekarang().discardable_kartu.size()!=0){
+                        System.out.print("Pilih kartu yang mau dibuang: ");
+                        buang_kartu=input.nextInt();
+                        main_menu.setTopCard(main_menu.getPemainSekarang().discardable_kartu.get(buang_kartu-1));//Menjadikan kartu paling atas sesuai dengan kartu yang dibuang
+                        main_menu.getPemainSekarang().discard(main_menu.getTopCard());//Buang kartunya
+                        for (int i=0;i<main_menu.getPemainSekarang().discardable_kartu.size();i++){//Mengecheck apakah kartu masih ada yang sama di tangan
+                            if((main_menu.getPemainSekarang().kartu.get(i).getType()==main_menu.getTopCard().getType())&&(main_menu.getPemainSekarang().kartu.get(i).getNum()==main_menu.getTopCard().getNum())&&(main_menu.getPemainSekarang().kartu.get(i).getColor()==main_menu.getTopCard().getColor())){
+                                multi_disc=true;
                             }
-                            main_menu.getPemainSekarang().kartu.remove(i);
-                            System.out.print("Apakah anda masih ingin membuang kartu anda?(Y/N) ");
-                            opsi_discard=input.next();
-                            if(opsi_discard.equals("N")){
-                                done_discard=true;
+                        }
+                        if(multi_disc){
+                            System.out.print("Anda memiliki kartu yang sama persis dengan arena sekarang. Apakah anda ingin mengeluarkannya?(Y/N)");
+                            perintah=input.next();
+                            if(perintah.equals("Y")){
+                                main_menu.getPemainSekarang().discard(main_menu.getTopCard());//Buang kartunya
                             }
                         }
                     }
-                    
                     //Ganti pemainnya
                     System.out.println("Anda telah membuang kartu/tidak memiliki kartu yang dapat dibuang!");
                     System.out.println("Giliran akan berganti!");

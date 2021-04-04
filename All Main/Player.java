@@ -38,7 +38,6 @@ public class Player {
             System.out.println((i+1)+". "+kartu.get(i));
         }
     }
-
     //Menampilkan kartu yang bisa di discard
     public void getdiscardableHand(Card top_card){
         System.out.println("Kartu yang bisa dikeluarkan pemain: ");
@@ -54,8 +53,17 @@ public class Player {
 
     }
     //Buang kartu
-    public void discard(int i){
-        discardable_kartu.remove(i);
+    public void discard(Card kartu_pile){
+        boolean found=false;
+        int i=0;
+        while(!found){
+            if((kartu.get(i).getType()==kartu_pile.getType())&&(kartu.get(i).getNum()==kartu_pile.getNum())&&(kartu.get(i).getColor()==kartu_pile.getColor())){
+                found=true;
+            }else{
+                i++;
+            }
+        }
+        kartu.remove(i);
     }
     //Fungsi mengecheck apakah kartu bisa di discard
     public boolean discardable(Card kartu_1, Card kartu_2){//Asumsi kartu 2 selalu kartu yang paling atas
