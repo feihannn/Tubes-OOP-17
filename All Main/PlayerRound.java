@@ -16,7 +16,7 @@ public class PlayerRound {
     public Player getCurrPlayer() { // Pemain yang sedang mendapat giliran
         return players[current];
     }
-    
+
     public void reverseRotation() { // mengubah arah putaran giliran pemain
         if (rotation.equals(Rotation.CLOCKWISE)) {
             rotation = Rotation.COUNTER_CLOCK_WISE;
@@ -29,7 +29,7 @@ public class PlayerRound {
         current = getNextIndex();
         return getCurrPlayer();
     }
-    
+
     private int getNextIndex() {
         var shiftOne = rotation == Rotation.CLOCKWISE ? 1 : -1;
         return (players.length + current + shiftOne) % players.length;
