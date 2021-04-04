@@ -133,7 +133,7 @@ public class Main {
                         buang_kartu=input.nextInt();
                         main_menu.setTopCard(main_menu.getPemainSekarang().discardable_kartu.get(buang_kartu-1));//Menjadikan kartu paling atas sesuai dengan kartu yang dibuang
                         main_menu.getPemainSekarang().discard(main_menu.getTopCard());//Buang kartunya
-                        for (int i=0;i<main_menu.getPemainSekarang().discardable_kartu.size();i++){//Mengecheck apakah kartu masih ada yang sama di tangan
+                        for (int i=0;i<main_menu.getPemainSekarang().kartu.size();i++){//Mengecheck apakah kartu masih ada yang sama di tangan
                             if((main_menu.getPemainSekarang().kartu.get(i).getType()==main_menu.getTopCard().getType())&&(main_menu.getPemainSekarang().kartu.get(i).getNum()==main_menu.getTopCard().getNum())&&(main_menu.getPemainSekarang().kartu.get(i).getColor()==main_menu.getTopCard().getColor())){
                                 multi_disc=true;
                             }
