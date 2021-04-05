@@ -44,7 +44,7 @@ public class Player {
         }
     }
 
-    //Menampilkan kartu yang bisa di discard
+    //Menampilkan kartu yang bisa di discard SECARA GENERAL
     public void getdiscardableHand(Card top_card){
         System.out.println("Kartu yang bisa dikeluarkan pemain: ");
         this.discardable_kartu.clear();
@@ -57,6 +57,34 @@ public class Player {
             System.out.println((i+1)+". "+discardable_kartu.get(i));
         }
 
+    }
+    //Menampilkan kartu yang bisa di discard berdasarkan warna tertentu
+    public void getdiscardablecolor(Color warna){
+        System.out.println("Kartu yang bisa dikeluarkan pemain: ");
+        this.discardable_kartu.clear();
+        for(int i=0;i<kartu.size();i++){
+            if(kartu.get(i).getColor()==warna.toString()){
+                this.discardable_kartu.add(kartu.get(i));
+            }
+        }
+        for (int i = 0; i < discardable_kartu.size(); i++){
+            System.out.println((i+1)+". "+discardable_kartu.get(i));
+        }
+    }
+    //Menampilkan kartu yang bisa di discard pada saat melakukan tumpukan+2
+    public void getdiscardablestack(){
+        System.out.println("Kartu yang bisa dikeluarkan pemain: ");
+        this.discardable_kartu.clear();
+        for(int i=0;i<kartu.size();i++){
+            if(kartu.get(i).getType()!=null){
+                if(kartu.get(i).getType().equals(Type.DRAW2.toString())){
+                    this.discardable_kartu.add(kartu.get(i));
+                }
+            }
+        }
+        for (int i = 0; i < discardable_kartu.size(); i++){
+            System.out.println((i+1)+". "+discardable_kartu.get(i));
+        }
     }
     //Buang kartu
     public void discard(Card kartu_pile){

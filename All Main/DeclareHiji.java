@@ -22,7 +22,7 @@ public class DeclareHiji {
                 player.playerTurn+1;// lanjut next orang
                 System.exit(0);
             } else if (str.equals("hiji").toUpperCase()){
-                System.out.println("You declared HIJI")
+                System.out.println("You declared HIJI");
             }
         }
     };
@@ -45,7 +45,7 @@ public class DeclareHiji {
 
     public void declare() {
         try {
-            getInput()
+            getInput();
             
         } catch (Exception e) {
             System.out.println(e);
