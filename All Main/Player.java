@@ -53,6 +53,7 @@ public class Player {
                 this.discardable_kartu.add(kartu.get(i));
             }
         }
+        System.out.println("0. Cancel");
         for (int i = 0; i < discardable_kartu.size(); i++){
             System.out.println((i+1)+". "+discardable_kartu.get(i));
         }
@@ -67,6 +68,7 @@ public class Player {
                 this.discardable_kartu.add(kartu.get(i));
             }
         }
+        System.out.println("0. Cancel");
         for (int i = 0; i < discardable_kartu.size(); i++){
             System.out.println((i+1)+". "+discardable_kartu.get(i));
         }
@@ -82,6 +84,7 @@ public class Player {
                 }
             }
         }
+        System.out.println("0. Cancel");
         for (int i = 0; i < discardable_kartu.size(); i++){
             System.out.println((i+1)+". "+discardable_kartu.get(i));
         }

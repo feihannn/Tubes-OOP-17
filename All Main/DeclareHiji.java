@@ -1,39 +1,43 @@
 import java.util.Timer;
 import java.util.TimerTask;
 import java.io.*;
-import java.util.ArrayList;
 
 //
 public class DeclareHiji {
-
-    ArrayList<String> addCard = new ArrayList<String>();// temporary array entar tinggal ganti aja jadi List
+    private Player player = new Player("Dummy", -999);
+    // temporary array entar tinggal ganti aja jadi List
     // kartu yangada di tangan pemain
 
-    Deck deck = new Deck();
-    Player curPlayer = new Player(getPlayerName(), getPlayerTurn());// ini gw gk ngerti pokoknya diinisiasi siapa yang
-                                                                    // mau declare hijinya
+    //Deck deck = new Deck();
+    public DeclareHiji(Player pemain){
+        this.player=pemain;
+    }
+    // ArrayList<Card> player = (new Player()).kartu;
     // diisi sama turn player keseluruhan
     private String str = "";
 
     TimerTask task = new TimerTask() {
         public void run() {
             if (str.equals("")) {
-                System.out.println(getPlayerName() + " didn't declare HIJI, here's 2 cards for you");
-                addedCard();
-                // turn player ganti ke setelahnya
+                System.out.println("You didn't declare HIJI, here's 2 cards for you");
+                player.drawupto(2);
                 System.exit(0);
+                // turn player ganti ke setelahnya
             }
         }
     };
-
+    /*
     public ArrayList<String> addedCard() {
-
-        addCard.add(curPlayer.getKartuTangan().toString());
+        ArrayList<String> addCard = new ArrayList<String>();
+        addCard.add(player.getKartuTangan().toString());
         for (int i = 0; i < 2; i++) {
-            addCard.add(deck.getCard().toString());
+            String X = deck.getCard().toString();
+            addCard.add(X);
+            System.out.println(X);
         }
+        // System.out.println(addCard);
         return addCard;
-    }
+    }*/
 
     public void getInput() throws Exception {
         Timer timer = new Timer();
@@ -47,17 +51,19 @@ public class DeclareHiji {
         System.out.println("You declared HIJI"); // You diganti sama nama playernya
         // turn player ganti ke setelahnya
     }
-
+    public Player getPlayer(){
+        return this.player;
+    }
     // jangann diapus code dibawah ini soalnya bakaln digunain setiap mau declare
     // hiji
-
+    /*
     public static void main(String[] args) {
         try {
             (new DeclareHiji()).getInput();
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
+    }*/
 
 }
 
