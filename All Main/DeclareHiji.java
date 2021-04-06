@@ -5,20 +5,20 @@ import java.util.ArrayList;
 
 //
 public class DeclareHiji {
-
-    ArrayList<String> addCard = new ArrayList<String>();// temporary array entar tinggal ganti aja jadi List
+    private Player player = (new Player("Dummy", -999));
+    // temporary array entar tinggal ganti aja jadi List
     // kartu yangada di tangan pemain
 
     Deck deck = new Deck();
-    Player curPlayer = new Player(getPlayerName(), getPlayerTurn());// ini gw gk ngerti pokoknya diinisiasi siapa yang
-                                                                    // mau declare hijinya
+
+    // ArrayList<Card> player = (new Player()).kartu;
     // diisi sama turn player keseluruhan
     private String str = "";
 
     TimerTask task = new TimerTask() {
         public void run() {
             if (str.equals("")) {
-                System.out.println(getPlayerName() + " didn't declare HIJI, here's 2 cards for you");
+                System.out.println("You didn't declare HIJI, here's 2 cards for you");
                 addedCard();
                 // turn player ganti ke setelahnya
                 System.exit(0);
@@ -27,11 +27,14 @@ public class DeclareHiji {
     };
 
     public ArrayList<String> addedCard() {
-
-        addCard.add(curPlayer.getKartuTangan().toString());
+        ArrayList<String> addCard = new ArrayList<String>();
+        addCard.add(player.getKartuTangan().toString());
         for (int i = 0; i < 2; i++) {
-            addCard.add(deck.getCard().toString());
+            String X = deck.getCard().toString();
+            addCard.add(X);
+            System.out.println(X);
         }
+        // System.out.println(addCard);
         return addCard;
     }
 
